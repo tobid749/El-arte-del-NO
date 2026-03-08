@@ -5,6 +5,7 @@ const timeEl = document.getElementById('time');
 const nextPhraseBtn = document.getElementById('nextPhraseBtn');
 const cardEl = document.querySelector('.card');
 const fortuneShellEl = document.querySelector('.fortune-shell');
+const rejectStampEl = document.getElementById('rejectStamp');
 const defaultButtonLabel = nextPhraseBtn.textContent;
 
 const NAAS_ENDPOINT = 'https://naas.isalman.dev/no';
@@ -78,6 +79,12 @@ const renderPhrase = ({ phrase, source }) => {
     phraseEl.textContent = phrase;
     sourceEl.textContent = source;
     setMetaTime();
+
+    const stampLabels = ['DENEGADO', 'NOPE', 'RECHAZADO'];
+    rejectStampEl.textContent = stampLabels[Math.floor(Math.random() * stampLabels.length)];
+    cardEl.classList.remove('is-stamped');
+    void cardEl.offsetWidth;
+    cardEl.classList.add('is-stamped');
 
     fortuneShellEl.classList.remove('is-revealed');
     void fortuneShellEl.offsetWidth;

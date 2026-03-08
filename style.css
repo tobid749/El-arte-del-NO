@@ -122,10 +122,52 @@ h1 {
 	transform: translateX(-100%);
 }
 
+.no-confetti {
+	position: absolute;
+	inset: -11%;
+	pointer-events: none;
+	z-index: 4;
+}
+
+.no-chip {
+	position: absolute;
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.09em;
+	padding: 0.28rem 0.5rem;
+	border-radius: 999px;
+	color: rgba(225, 232, 255, 0.82);
+	background: rgba(110, 125, 255, 0.16);
+	border: 1px solid rgba(168, 179, 255, 0.24);
+	opacity: 0.45;
+	transform: translateY(0);
+	animation: chipFloat 8s ease-in-out infinite;
+}
+
+.no-chip:nth-child(1) {
+	top: 14%;
+	left: -4%;
+	animation-delay: 0s;
+}
+
+.no-chip:nth-child(2) {
+	top: 40%;
+	right: -9%;
+	animation-delay: 1.2s;
+}
+
+.no-chip:nth-child(3) {
+	bottom: 12%;
+	left: -8%;
+	animation-delay: 2.1s;
+}
+
 .status {
 	margin: 0;
 	color: #a9b0e5;
 	font-size: 0.9rem;
+	position: relative;
+	z-index: 2;
 }
 
 .fortune-shell {
@@ -142,6 +184,9 @@ h1 {
 	display: grid;
 	place-items: center;
 	transition: transform 260ms ease, filter 260ms ease, box-shadow 260ms ease;
+	position: relative;
+	z-index: 2;
+	overflow: visible;
 }
 
 .fortune-shell.is-revealed {
@@ -158,6 +203,8 @@ h1 {
 	background: radial-gradient(circle at center, rgba(42, 57, 136, 0.95) 0%, rgba(10, 14, 38, 0.98) 72%);
 	border: 1px solid rgba(169, 181, 255, 0.22);
 	box-shadow: inset 0 0 34px rgba(130, 151, 255, 0.24);
+	position: relative;
+	z-index: 2;
 }
 
 .phrase {
@@ -214,6 +261,11 @@ h1 {
 	animation: oraclePulse 900ms ease-in-out infinite;
 }
 
+.card.is-loading .no-chip {
+	opacity: 0.82;
+	animation-duration: 3.6s;
+}
+
 .card.is-loading::after {
 	opacity: 1;
 	animation: scanLine 1.3s linear infinite;
@@ -224,6 +276,32 @@ h1 {
 	justify-content: space-between;
 	align-items: center;
 	gap: 0.75rem;
+	position: relative;
+	z-index: 2;
+}
+
+.reject-stamp {
+	position: absolute;
+	right: 1.25rem;
+	bottom: 5.2rem;
+	margin: 0;
+	font-size: 0.82rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	color: rgba(255, 126, 126, 0.95);
+	border: 2px solid rgba(255, 126, 126, 0.9);
+	border-radius: 8px;
+	padding: 0.3rem 0.55rem;
+	transform: rotate(-14deg) scale(0.6);
+	opacity: 0;
+	text-shadow: 0 0 10px rgba(255, 88, 88, 0.25);
+	background: rgba(45, 7, 11, 0.25);
+	pointer-events: none;
+	z-index: 3;
+}
+
+.card.is-stamped .reject-stamp {
+	animation: stampIn 560ms cubic-bezier(0.18, 0.82, 0.24, 1);
 }
 
 .badge {
@@ -252,6 +330,7 @@ h1 {
 	transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
 	position: relative;
 	overflow: hidden;
+	z-index: 2;
 }
 
 .cta::after {
@@ -316,6 +395,12 @@ body.is-fetching::after {
 	body,
 	.card::after {
 		animation: none;
+	}
+
+	.no-chip,
+	.reject-stamp,
+	.card.is-stamped .reject-stamp {
+		animation: none !important;
 	}
 
 	.fortune-shell,
@@ -421,6 +506,31 @@ body.is-fetching::after {
 	}
 }
 
+@keyframes chipFloat {
+	0%,
+	100% {
+		transform: translateY(0) rotate(0deg);
+	}
+	50% {
+		transform: translateY(-9px) rotate(-3deg);
+	}
+}
+
+@keyframes stampIn {
+	0% {
+		opacity: 0;
+		transform: rotate(-14deg) scale(0.5);
+	}
+	50% {
+		opacity: 0.98;
+		transform: rotate(-14deg) scale(1.12);
+	}
+	100% {
+		opacity: 0.82;
+		transform: rotate(-14deg) scale(1);
+	}
+}
+
 @media (max-width: 560px) {
 	body {
 		padding: 1rem;
@@ -431,7 +541,28 @@ body.is-fetching::after {
 		align-items: flex-start;
 	}
 
+	.reject-stamp {
+		right: 1rem;
+		bottom: 5rem;
+	}
+
 	.fortune-core {
 		padding: 1.2rem;
+	}
+
+	.no-confetti {
+		inset: -7%;
+	}
+
+	.no-chip:nth-child(1) {
+		left: 1%;
+	}
+
+	.no-chip:nth-child(2) {
+		right: -3%;
+	}
+
+	.no-chip:nth-child(3) {
+		left: -2%;
 	}
 }
