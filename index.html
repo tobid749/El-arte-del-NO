@@ -1,94 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>No as a Service</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
 <body>
 
-    <header class="navbar">
-        <div class="nav-container">
-            <h2 class="logo">NAAS</h2>
-            <nav>
-                <a href="#como">Cómo funciona</a>
-                <a href="#ejemplos">Ejemplos</a>
-                <a href="#about">Sobre el proyecto</a>
-            </nav>
-        </div>
-    </header>
-    
-    <div class="rain-layer" id="rainLayer" aria-hidden="true"></div>
-    
-    <main class="page">
-    
-        <section class="hero">
-            <p class="eyebrow">No as a Service</p>
-            <h1>El arte de decir que no,<br>con excusas memorables.</h1>
-            <p class="subtitle">Pide una respuesta y recibe una excusa perfectamente inútil para no hacer nada.</p>
-        </section>
-    
-        <section class="card" aria-live="polite">
-            <p class="status" id="status">El oráculo está calentando su negatividad…</p>
-    
-            <div class="fortune-shell">
-                <div class="fortune-core">
-                    <blockquote class="phrase" id="phrase">
-                        Haz clic y recibe una negativa profesional.
-                    </blockquote>
-                </div>
-            </div>
-    
-            <p class="reject-stamp" id="rejectStamp" aria-hidden="true">DENEGADO</p>
-    
-            <div class="meta">
-                <span class="badge" id="source">Sin juicio emitido</span>
-                <span class="time" id="time">--:--</span>
-            </div>
-    
-            <button class="cta" id="nextPhraseBtn" type="button">
-                Dame otra excusa
-            </button>
-        </section>
-    
-    </main>
-    
-    <section id="como" class="info-section">
-        <h2>¿Cómo funciona?</h2>
-        <div class="steps">
-            <div class="step">
-                <h3>1</h3>
-                <p>Presionás el botón.</p>
-            </div>
-            <div class="step">
-                <h3>2</h3>
-                <p>El sistema consulta el servicio NAAS.</p>
-            </div>
-            <div class="step">
-                <h3>3</h3>
-                <p>Recibís una excusa elegante para no hacer nada.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section id="ejemplos" class="info-section">
-        <h2>Ejemplos de excusas</h2>
-    
-        <ul class="examples">
-            <li>No puedo, estoy optimizando mi procrastinación.</li>
-            <li>Hoy mi agenda dice “evitar responsabilidades”.</li>
-            <li>El universo me recomienda descansar.</li>
-            <li>Mi motivación está en mantenimiento.</li>
-        </ul>
-    </section>
-    
-    <section id="about" class="info-section">
-        <h2>Sobre el proyecto</h2>
-        <p>
-            Este proyecto demuestra cómo consumir una API pública desde JavaScript
-            para generar respuestas dinámicas. Utiliza HTML, CSS y JavaScript para
-            crear una experiencia interactiva y divertida basada en el servicio
-            No as a Service.
-        </p>
-    </section>
-    
-    <footer class="footer">
-        <p>Proyecto educativo — 2026</p>
-    </footer>
-    
-    <script src="app.js"></script>
-    
-    </body>
+<header class="navbar">
+<div class="nav-container">
+<h2 class="logo">NAAS</h2>
+
+<nav>
+<a href="#como">Cómo funciona</a>
+<a href="#ejemplos">Ejemplos</a>
+<a href="#about">Sobre el proyecto</a>
+</nav>
+
+</div>
+</header>
+
+<div class="rain-layer" id="rainLayer"></div>
+
+<main class="page">
+
+<section class="hero">
+<p class="eyebrow">No as a Service</p>
+
+<h1>
+El arte de decir que no,<br>
+con excusas memorables.
+</h1>
+
+<p class="subtitle">
+Pide una respuesta y recibe una excusa perfectamente inútil para no hacer nada.
+</p>
+</section>
+
+<section class="card">
+
+<p class="status" id="status">
+El oráculo está calentando su negatividad…
+</p>
+
+<div class="fortune-shell">
+<div class="fortune-core">
+
+<blockquote class="phrase" id="phrase">
+Haz clic y recibe una negativa profesional.
+</blockquote>
+
+</div>
+</div>
+
+<p class="reject-stamp" id="rejectStamp">DENEGADO</p>
+
+<div class="meta">
+
+<span class="badge" id="source">
+Sin juicio emitido
+</span>
+
+<span class="time" id="time">
+--:--
+</span>
+
+</div>
+
+<button class="cta" id="nextPhraseBtn">
+Dame otra excusa
+</button>
+
+</section>
+
+</main>
+
+<section id="como" class="info-section">
+
+<h2>¿Cómo funciona?</h2>
+
+<div class="steps">
+
+<div class="step">
+<h3>1</h3>
+<p>Presionás el botón.</p>
+</div>
+
+<div class="step">
+<h3>2</h3>
+<p>El sistema consulta el servicio NAAS.</p>
+</div>
+
+<div class="step">
+<h3>3</h3>
+<p>Recibís una excusa elegante para no hacer nada.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="ejemplos" class="info-section">
+
+<h2>Ejemplos de excusas</h2>
+
+<ul class="examples">
+<li>No puedo, estoy optimizando mi procrastinación.</li>
+<li>Hoy mi agenda dice “evitar responsabilidades”.</li>
+<li>El universo me recomienda descansar.</li>
+<li>Mi motivación está en mantenimiento.</li>
+</ul>
+
+</section>
+
+<section id="about" class="info-section">
+
+<h2>Sobre el proyecto</h2>
+
+<p>
+Este proyecto demuestra cómo consumir una API pública desde JavaScript
+para generar respuestas dinámicas utilizando el servicio
+No as a Service.
+</p>
+
+</section>
+
+<footer class="footer">
+<p>Proyecto educativo — 2026</p>
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+</html>
