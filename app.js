@@ -10,22 +10,15 @@ const rejectStampEl = document.getElementById('rejectStamp');
 const defaultButtonLabel = nextPhraseBtn.textContent;
 
 const NAAS_ENDPOINT = 'https://naas.isalman.dev/no';
-const CHIP_LABELS = ['NO', 'NOP', 'NEGADO'];
+const CHIP_LABELS = ['NO', 'JAMÁS', 'NEGADO', 'NI EN SUEÑOS', 'NOPE'];
 
 let rainTimeoutId = null;
 let lastDropX = null;
 
 const normalizePhrase = (value) => {
     const text = String(value || '').trim();
-    if (!text) {
-        return 'No.';
-    }
-
-    if (text.endsWith('.')) {
-        return text;
-    }
-
-    return `${text}.`;
+    if (!text) return 'No.';
+    return text.endsWith('.') ? text : `${text}.`;
 };
 
 const setLoading = (isLoading) => {
@@ -34,11 +27,11 @@ const setLoading = (isLoading) => {
     cardEl.classList.toggle('is-loading', isLoading);
     document.body.classList.toggle('is-fetching', isLoading);
     cardEl.setAttribute('aria-busy', String(isLoading));
-    nextPhraseBtn.textContent = isLoading ? 'Buscando excusa...' : defaultButtonLabel;
+    nextPhraseBtn.textContent = isLoading ? '⏳ Buscando excusa...' : defaultButtonLabel;
 
     statusEl.textContent = isLoading
-    ? 'Fabricando una excusa premium…'
-    : 'Excusa lista para usar';
+        ? '🔄 Fabricando una negativa de alta calidad…'
+        : '✅ Excusa lista para usar';
 };
 
 const setMetaTime = () => {
@@ -50,9 +43,7 @@ const setMetaTime = () => {
 
 const fetchNoAsAService = async () => {
     const response = await fetch(`${NAAS_ENDPOINT}?t=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) {
-        throw new Error('No as a Service no disponible');
-    }
+    if (!response.ok) throw new Error('No as a Service no disponible');
 
     const contentType = response.headers.get('content-type') || '';
     let phrase = '';
@@ -72,20 +63,19 @@ const fetchNoAsAService = async () => {
 
 const getRandomWaitingMessage = () => {
     const messages = [
-        'Buscando una forma creativa de decir que no…',
-        'Puliendo una excusa socialmente aceptable…',
-        'Negociando con la pereza universal…'
+        '🙅 Consultando el libro sagrado de las negativas…',
+        '💅 Puliendo una excusa de nivel olímpico…',
+        '🚫 Negociando con las fuerzas del NO universal…',
+        '😤 Buscando la forma más elegante de decirte que no…',
+        '🎭 Ensayando el rechazo perfecto…',
     ];
-
     return messages[Math.floor(Math.random() * messages.length)];
 };
 
 const randomInRange = (min, max) => Math.random() * (max - min) + min;
 
 const spawnNoChip = () => {
-    if (!rainLayerEl) {
-        return;
-    }
+    if (!rainLayerEl) return;
 
     const chipEl = document.createElement('span');
     chipEl.className = 'rain-chip';
@@ -95,32 +85,26 @@ const spawnNoChip = () => {
     if (lastDropX !== null && Math.abs(xPercent - lastDropX) < 12) {
         xPercent = (xPercent + randomInRange(14, 28)) % 97;
     }
-
     lastDropX = xPercent;
 
     chipEl.style.left = `${xPercent}%`;
-    chipEl.style.setProperty('--chip-duration', `${randomInRange(6.3, 10.4).toFixed(2)}s`);
-    chipEl.style.setProperty('--chip-drift', `${randomInRange(-18, 18).toFixed(1)}px`);
-    chipEl.style.setProperty('--chip-rotation', `${randomInRange(-8, 8).toFixed(1)}deg`);
+    chipEl.style.setProperty('--chip-duration', `${randomInRange(5.0, 8.5).toFixed(2)}s`);
+    chipEl.style.setProperty('--chip-drift', `${randomInRange(-28, 28).toFixed(1)}px`);
+    chipEl.style.setProperty('--chip-rotation', `${randomInRange(-15, 15).toFixed(1)}deg`);
 
     rainLayerEl.appendChild(chipEl);
 
-    const lifeTimeMs = Number.parseFloat(chipEl.style.getPropertyValue('--chip-duration')) * 1000;
-    window.setTimeout(() => {
-        chipEl.remove();
-    }, lifeTimeMs + 250);
+    const lifeTimeMs = parseFloat(chipEl.style.getPropertyValue('--chip-duration')) * 1000;
+    window.setTimeout(() => chipEl.remove(), lifeTimeMs + 250);
 };
 
 const scheduleRain = () => {
     spawnNoChip();
-    rainTimeoutId = window.setTimeout(scheduleRain, randomInRange(780, 1650));
+    rainTimeoutId = window.setTimeout(scheduleRain, randomInRange(500, 1100));
 };
 
 const startNoRain = () => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || rainTimeoutId) {
-        return;
-    }
-
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || rainTimeoutId) return;
     scheduleRain();
 };
 
@@ -129,7 +113,7 @@ const renderPhrase = ({ phrase, source }) => {
     sourceEl.textContent = source;
     setMetaTime();
 
-    const stampLabels = ['DENEGADO', 'NOPE', 'RECHAZADO'];
+    const stampLabels = ['DENEGADO', 'RECHAZADO', 'BLOQUEADO', 'IMPOSIBLE', 'NI LOCO'];
     rejectStampEl.textContent = stampLabels[Math.floor(Math.random() * stampLabels.length)];
     cardEl.classList.remove('is-stamped');
     void cardEl.offsetWidth;
@@ -147,12 +131,12 @@ const loadPhrase = async () => {
     try {
         const payload = await fetchNoAsAService();
         renderPhrase(payload);
-        statusEl.textContent = 'No as a Service respondió con cero compromiso.';
+        statusEl.textContent = '🎯 No as a Service respondió con cero compromiso.';
     } catch {
-        phraseEl.textContent = 'Ni para negarte estamos conectados. Intenta de nuevo.';
+        phraseEl.textContent = '📡 Ni para negarte estamos conectados. Intenta de nuevo.';
         sourceEl.textContent = 'Error de conexión con NAAS';
         setMetaTime();
-        statusEl.textContent = 'Se cayó la fábrica de excusas';
+        statusEl.textContent = '💥 Se cayó la fábrica de excusas';
     } finally {
         setLoading(false);
     }
